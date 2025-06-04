@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "json.hpp"
+using json = nlohmann::json;
 
 void PublisherManager::add() {
     int id;
@@ -136,18 +138,13 @@ void PublisherManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& publisher : publishers) {
-        out << publisher.id << ";"
-            << publisher.name << ";"
-            << publisher.address << ";"
-            << publisher.phone << ";"
-            << publisher.email << ";"
-            << publisher.chiefEditor << "\n";
-    }
-
+    json j = publishers;
+    out << j.dump(4);
     out.close();
+
     std::cout << "Publishers saved to " << filename << "\n";
 }
+
 
 void PublisherManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -156,27 +153,14 @@ void PublisherManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    publishers.clear();
-
-    std::string line, token;
-    int id;
-    std::string name, address, phone, email, chiefEditor;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-        std::getline(ss, token, ';'); id = std::stoi(token);
-        std::getline(ss, name, ';');
-        std::getline(ss, address, ';');
-        std::getline(ss, phone, ';');
-        std::getline(ss, email, ';');
-        std::getline(ss, chiefEditor, ';');
-
-        publishers.emplace_back(id, name, address, phone, email, chiefEditor);
-    }
-
+    json j;
+    in >> j;
+    publishers = j.get<std::vector<Publisher>>();
     in.close();
+
     std::cout << "Publishers loaded from " << filename << "\n";
 }
+
 
 Publisher* PublisherManager::findById(int id) {
     for (auto& publisher : publishers) {

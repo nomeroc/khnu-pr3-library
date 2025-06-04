@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Pearson",
+    "address": "221B Baker Street",
+    "phone": "+1-800-555-1234",
+    "email": "contact@pearson.com",
+    "chiefEditor": "John Doe"
+  },
+  {
+    "id": 2,
+    "name": "Penguin Books",
+    "address": "80 Strand, London",
+    "phone": "+44-20-7010-3000",
+    "email": "info@penguin.co.uk",
+    "chiefEditor": "Sarah Collins"
+  },
+  {
+    "id": 3,
+    "name": "Random House",
+    "address": "1745 Broadway, New York",
+    "phone": "+1-212-782-9000",
+    "email": "editorial@randomhouse.com",
+    "chiefEditor": "Michael Harper"
+  }
+]

@@ -104,17 +104,13 @@ void ReleaseManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& release : releases) {
-        out << release.batchId << ";"
-            << release.bookId << ";"
-            << release.publisherId << ";"
-            << release.copies << ";"
-            << release.releaseDate << "\n";
-    }
-
+    json j = releases;
+    out << j.dump(4);
     out.close();
+
     std::cout << "Releases saved to " << filename << "\n";
 }
+
 
 void ReleaseManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -123,26 +119,14 @@ void ReleaseManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    releases.clear();
-
-    std::string line, token;
-    int batchId, bookId, publisherId, copies;
-    std::string releaseDate;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-        std::getline(ss, token, ';'); batchId = std::stoi(token);
-        std::getline(ss, token, ';'); bookId = std::stoi(token);
-        std::getline(ss, token, ';'); publisherId = std::stoi(token);
-        std::getline(ss, token, ';'); copies = std::stoi(token);
-        std::getline(ss, releaseDate, ';');
-
-        releases.emplace_back(batchId, bookId, publisherId, copies, releaseDate);
-    }
-
+    json j;
+    in >> j;
+    releases = j.get<std::vector<Release>>();
     in.close();
+
     std::cout << "Releases loaded from " << filename << "\n";
 }
+
 
 Release* ReleaseManager::findByBatchId(int batchId) {
     for (auto& release : releases) {

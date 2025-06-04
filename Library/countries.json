@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "USA"
+  },
+  {
+    "id": 2,
+    "name": "United Kingdom"
+  },
+  {
+    "id": 3,
+    "name": "Russia"
+  },
+  {
+    "id": 4,
+    "name": "France"
+  },
+  {
+    "id": 5,
+    "name": "Spain"
+  }
+]

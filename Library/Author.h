@@ -1,5 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <string>
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class Author {
 public:
@@ -18,3 +21,23 @@ public:
 
     void print() const;
 };
+
+// ✅ JSON support
+
+inline void to_json(json& j, const Author& a) {
+    j = json{
+        {"id", a.id},
+        {"firstName", a.firstName},
+        {"lastName", a.lastName},
+        {"middleName", a.middleName},
+        {"countryId", a.countryId}
+    };
+}
+
+inline void from_json(const json& j, Author& a) {
+    j.at("id").get_to(a.id);
+    j.at("firstName").get_to(a.firstName);
+    j.at("lastName").get_to(a.lastName);
+    j.at("middleName").get_to(a.middleName);
+    j.at("countryId").get_to(a.countryId);
+}

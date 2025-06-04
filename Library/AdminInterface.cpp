@@ -4,12 +4,12 @@
 #include "ConsoleUtils.h"
 
 AdminInterface::AdminInterface() {
-    bookManager.loadFromFile("books.txt");
-    authorManager.loadFromFile("authors.txt");
-    genreManager.loadFromFile("genres.txt");
-    countryManager.loadFromFile("countries.txt");
-    publisherManager.loadFromFile("publishers.txt");
-    releaseManager.loadFromFile("releases.txt");
+    bookManager.loadFromFile("books.json");
+    authorManager.loadFromFile("authors.json");
+    genreManager.loadFromFile("genres.json");
+    countryManager.loadFromFile("countries.json");
+    publisherManager.loadFromFile("publishers.json");
+    releaseManager.loadFromFile("releases.json");
 }
 
 void AdminInterface::showEntityMenu(const std::string& entityName, IDatabaseEntity& manager) {
@@ -109,12 +109,12 @@ void AdminInterface::run() {
         case 5: showEntityMenu("Publishers", publisherManager); break;
         case 6: showEntityMenu("Releases", releaseManager); break;
         case 0:
-            bookManager.saveToFile("books.txt");
-            authorManager.saveToFile("authors.txt");
-            genreManager.saveToFile("genres.txt");
-            countryManager.saveToFile("countries.txt");
-            publisherManager.saveToFile("publishers.txt");
-            releaseManager.saveToFile("releases.txt");
+            bookManager.saveToFile("books.json");
+            authorManager.saveToFile("authors.json");
+            genreManager.saveToFile("genres.json");
+            countryManager.saveToFile("countries.json");
+            publisherManager.saveToFile("publishers.json");
+            releaseManager.saveToFile("releases.json");
             std::cout << "Exiting...\n";
             break;
 

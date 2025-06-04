@@ -142,6 +142,7 @@
     <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\json.hpp" />
     <ClInclude Include="AdminInterface.h" />
     <ClInclude Include="AuthManager.h" />
     <ClInclude Include="Author.h" />

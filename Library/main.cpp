@@ -12,8 +12,8 @@ int main() {
     BookManager bookManager;
     AuthorManager authorManager;
 
-    bookManager.loadFromFile("books.txt");
-    authorManager.loadFromFile("authors.txt");
+    bookManager.loadFromFile("books.json");
+    authorManager.loadFromFile("authors.json");
 
     if (role == AuthManager::Role::ADMIN) {
         AdminInterface admin;
@@ -23,9 +23,6 @@ int main() {
         UserInterface user(bookManager, authorManager);
         user.run();
     }
-
-    bookManager.saveToFile("books.txt");
-    authorManager.saveToFile("authors.txt");
 
     return 0;
 }

@@ -1,5 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <string>
+#include "json.hpp"  // Adjust path if needed
+
+using json = nlohmann::json;
 
 class Publisher {
 public:
@@ -19,3 +22,24 @@ public:
 
     void print() const;
 };
+
+// ✅ JSON serialization
+inline void to_json(json& j, const Publisher& p) {
+    j = json{
+        {"id", p.id},
+        {"name", p.name},
+        {"address", p.address},
+        {"phone", p.phone},
+        {"email", p.email},
+        {"chiefEditor", p.chiefEditor}
+    };
+}
+
+inline void from_json(const json& j, Publisher& p) {
+    j.at("id").get_to(p.id);
+    j.at("name").get_to(p.name);
+    j.at("address").get_to(p.address);
+    j.at("phone").get_to(p.phone);
+    j.at("email").get_to(p.email);
+    j.at("chiefEditor").get_to(p.chiefEditor);
+}

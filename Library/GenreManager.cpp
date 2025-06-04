@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "json.hpp"
+using json = nlohmann::json;
 
 void GenreManager::add() {
     int id;
@@ -82,13 +84,13 @@ void GenreManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& genre : genres) {
-        out << genre.id << ";" << genre.name << "\n";
-    }
-
+    json j = genres;
+    out << j.dump(4);
     out.close();
+
     std::cout << "Genres saved to " << filename << "\n";
 }
+
 
 void GenreManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -97,23 +99,14 @@ void GenreManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    genres.clear();
-
-    std::string line, token;
-    int id;
-    std::string name;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-        std::getline(ss, token, ';'); id = std::stoi(token);
-        std::getline(ss, name, ';');
-
-        genres.emplace_back(id, name);
-    }
-
+    json j;
+    in >> j;
+    genres = j.get<std::vector<Genre>>();
     in.close();
+
     std::cout << "Genres loaded from " << filename << "\n";
 }
+
 
 Genre* GenreManager::findById(int id) {
     for (auto& genre : genres) {

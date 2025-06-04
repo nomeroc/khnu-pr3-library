@@ -4,6 +4,8 @@
 #include <fstream>
 #include <iomanip>
 #include "AuthorManager.h"
+#include "json.hpp"
+using json = nlohmann::json;
 
 void BookManager::add() {
     int id, genreId, authorId, countryId;
@@ -165,18 +167,13 @@ void BookManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& book : books) {
-        out << book.id << ";"
-            << book.title << ";"
-            << book.genreId << ";"
-            << book.authorId << ";"
-            << book.countryId << ";"
-            << book.price << "\n";
-    }
-
+    json j = books;
+    out << j.dump(4);  // Pretty print with 4-space indent
     out.close();
+
     std::cout << "Books saved to " << filename << "\n";
 }
+
 
 void BookManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -185,29 +182,14 @@ void BookManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    books.clear();
-
-    int id, genreId, authorId, countryId;
-    float price;
-    std::string title, line;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-        std::string token;
-
-        std::getline(ss, token, ';'); id = std::stoi(token);
-        std::getline(ss, title, ';');
-        std::getline(ss, token, ';'); genreId = std::stoi(token);
-        std::getline(ss, token, ';'); authorId = std::stoi(token);
-        std::getline(ss, token, ';'); countryId = std::stoi(token);
-        std::getline(ss, token, ';'); price = std::stof(token);
-
-        books.emplace_back(id, title, genreId, authorId, countryId, price);
-    }
-
+    json j;
+    in >> j;
+    books = j.get<std::vector<Book>>();
     in.close();
+
     std::cout << "Books loaded from " << filename << "\n";
 }
+
 
 const std::vector<Book>& BookManager::getAll() const {
     return books;

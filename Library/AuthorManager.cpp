@@ -4,6 +4,9 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+#include "json.hpp"
+using json = nlohmann::json;
+
 
 void AuthorManager::add() {
     int id, countryId;
@@ -128,17 +131,13 @@ void AuthorManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& author : authors) {
-        out << author.id << ";"
-            << author.firstName << ";"
-            << author.lastName << ";"
-            << author.middleName << ";"
-            << author.countryId << "\n";
-    }
-
+    json j = authors;
+    out << j.dump(4);  // Pretty print with 4 spaces
     out.close();
+
     std::cout << "Authors saved to " << filename << "\n";
 }
+
 
 void AuthorManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -147,27 +146,14 @@ void AuthorManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    authors.clear();
-
-    std::string line, token;
-    int id, countryId;
-    std::string firstName, lastName, middleName;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-
-        std::getline(ss, token, ';'); id = std::stoi(token);
-        std::getline(ss, firstName, ';');
-        std::getline(ss, lastName, ';');
-        std::getline(ss, middleName, ';');
-        std::getline(ss, token, ';'); countryId = std::stoi(token);
-
-        authors.emplace_back(id, firstName, lastName, middleName, countryId);
-    }
-
+    json j;
+    in >> j;
+    authors = j.get<std::vector<Author>>();
     in.close();
+
     std::cout << "Authors loaded from " << filename << "\n";
 }
+
 
 const std::vector<Author>& AuthorManager::getAll() const {
     return authors;

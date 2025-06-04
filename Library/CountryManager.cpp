@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "json.hpp"
+using json = nlohmann::json;
 
 void CountryManager::add() {
     int id;
@@ -81,13 +83,13 @@ void CountryManager::saveToFile(const std::string& filename) {
         return;
     }
 
-    for (const auto& country : countries) {
-        out << country.id << ";" << country.name << "\n";
-    }
-
+    json j = countries;
+    out << j.dump(4);
     out.close();
+
     std::cout << "Countries saved to " << filename << "\n";
 }
+
 
 void CountryManager::loadFromFile(const std::string& filename) {
     std::ifstream in(filename);
@@ -96,23 +98,14 @@ void CountryManager::loadFromFile(const std::string& filename) {
         return;
     }
 
-    countries.clear();
-
-    std::string line, token;
-    int id;
-    std::string name;
-
-    while (std::getline(in, line)) {
-        std::stringstream ss(line);
-        std::getline(ss, token, ';'); id = std::stoi(token);
-        std::getline(ss, name, ';');
-
-        countries.emplace_back(id, name);
-    }
-
+    json j;
+    in >> j;
+    countries = j.get<std::vector<Country>>();
     in.close();
+
     std::cout << "Countries loaded from " << filename << "\n";
 }
+
 
 Country* CountryManager::findById(int id) {
     for (auto& country : countries) {

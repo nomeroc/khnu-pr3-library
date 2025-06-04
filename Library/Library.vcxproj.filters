@@ -37,6 +37,9 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{9acb81dc-067c-427d-85f8-dec32a366a56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{67b8c01d-44e8-4913-8154-e62e01f3c209}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="ConsoleUtils.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json.hpp">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
