@@ -1,22 +1,22 @@
 [
-  {
-    "id": 1,
-    "name": "Fiction"
-  },
-  {
-    "id": 2,
-    "name": "Dystopian"
-  },
-  {
-    "id": 3,
-    "name": "Romance"
-  },
-  {
-    "id": 4,
-    "name": "Psychological Fiction"
-  },
-  {
-    "id": 5,
-    "name": "Historical Fiction"
-  }
+    {
+        "id": 1,
+        "name": "Fiction"
+    },
+    {
+        "id": 2,
+        "name": "Dystopian"
+    },
+    {
+        "id": 3,
+        "name": "Romance"
+    },
+    {
+        "id": 4,
+        "name": "Psychological Fiction"
+    },
+    {
+        "id": 5,
+        "name": "Historical Fiction"
+    }
 ]

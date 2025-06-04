@@ -1,9 +1,10 @@
-#include "ReleaseManager.h"
+﻿#include "ReleaseManager.h"
 #include <iostream>
 #include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <set>
 
 void ReleaseManager::add() {
     int batchId, bookId, publisherId, copies;
@@ -96,6 +97,96 @@ void ReleaseManager::listAll() const {
     }
 }
 
+void ReleaseManager::countCopiesByPublisherInYear(const PublisherManager& publisherManager, const std::string& year) const {
+    std::map<int, int> publisherCopyCount;
+
+    for (const auto& release : releases) {
+        if (release.releaseDate.substr(0, 4) == year) {
+            publisherCopyCount[release.publisherId] += release.copies;
+        }
+    }
+
+    std::cout << "\nBook copies released in " << year << " by publisher:\n";
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(30) << "Publisher"
+        << std::setw(10) << "Copies"
+        << "\n"
+        << std::string(46, '-') << "\n";
+
+    for (const auto& publisher : publisherManager.getAll()) {
+        int count = publisherCopyCount[publisher.id];
+        if (count > 0) {
+            std::cout << std::left
+                << std::setw(6) << publisher.id
+                << std::setw(30) << publisher.name
+                << std::setw(10) << count
+                << "\n";
+        }
+    }
+}
+
+void ReleaseManager::showBookWithMaxCopiesInYear(const BookManager& bookManager, const std::string& year) const {
+    int maxCopies = -1;
+    int maxBookId = -1;
+
+    for (const auto& release : releases) {
+        if (release.releaseDate.find(year) != std::string::npos) {
+            if (release.copies > maxCopies) {
+                maxCopies = release.copies;
+                maxBookId = release.bookId;
+            }
+        }
+    }
+
+    if (maxBookId != -1) {
+        const auto& books = bookManager.getAll();
+        auto it = std::find_if(books.begin(), books.end(), [=](const Book& b) {
+            return b.id == maxBookId;
+            });
+
+        if (it != books.end()) {
+            std::cout << "\nBook with most copies in " << year << ":\n";
+            std::cout << "Title: " << it->title << "\n";
+            std::cout << "Copies: " << maxCopies << "\n";
+        }
+        else {
+            std::cout << "\nBook data not found for ID " << maxBookId << "\n";
+        }
+    }
+    else {
+        std::cout << "\nNo releases found for year " << year << ".\n";
+    }
+}
+
+void ReleaseManager::countBooksPerPublisher(const PublisherManager& publisherManager) const {
+    std::map<int, std::set<int>> publisherBooks;
+
+    // Build map: publisherId → set of unique bookIds
+    for (const auto& release : releases) {
+        publisherBooks[release.publisherId].insert(release.bookId);
+    }
+
+    std::cout << "\nBooks Released by Each Publisher:\n";
+    std::cout << std::left << std::setw(6) << "ID"
+        << std::setw(25) << "Publisher Name"
+        << std::setw(15) << "Book Count"
+        << "\n" << std::string(46, '-') << "\n";
+
+    for (const auto& entry : publisherBooks) {
+        int publisherId = entry.first;
+        const auto& booksSet = entry.second;
+
+        const Publisher* pub = publisherManager.findById(publisherId);
+        std::string name = pub ? pub->name : "Unknown";
+
+        std::cout << std::setw(6) << publisherId
+            << std::setw(25) << name
+            << std::setw(15) << booksSet.size()
+            << "\n";
+    }
+
+}
 
 void ReleaseManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);

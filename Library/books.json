@@ -1,82 +1,82 @@
 [
-  {
-    "id": 1,
-    "title": "To Kill a Mockingbird",
-    "genreId": 1,
-    "authorId": 1,
-    "countryId": 1,
-    "price": 299.99
-  },
-  {
-    "id": 2,
-    "title": "1984",
-    "genreId": 2,
-    "authorId": 2,
-    "countryId": 2,
-    "price": 249.50
-  },
-  {
-    "id": 3,
-    "title": "Pride and Prejudice",
-    "genreId": 3,
-    "authorId": 3,
-    "countryId": 2,
-    "price": 199.00
-  },
-  {
-    "id": 4,
-    "title": "The Great Gatsby",
-    "genreId": 1,
-    "authorId": 4,
-    "countryId": 1,
-    "price": 225.75
-  },
-  {
-    "id": 5,
-    "title": "The Catcher in the Rye",
-    "genreId": 1,
-    "authorId": 5,
-    "countryId": 1,
-    "price": 279.99
-  },
-  {
-    "id": 6,
-    "title": "Brave New World",
-    "genreId": 2,
-    "authorId": 6,
-    "countryId": 2,
-    "price": 260.00
-  },
-  {
-    "id": 7,
-    "title": "Crime and Punishment",
-    "genreId": 4,
-    "authorId": 7,
-    "countryId": 3,
-    "price": 350.95
-  },
-  {
-    "id": 8,
-    "title": "The Brothers Karamazov",
-    "genreId": 4,
-    "authorId": 7,
-    "countryId": 3,
-    "price": 399.00
-  },
-  {
-    "id": 9,
-    "title": "Les Misérables",
-    "genreId": 5,
-    "authorId": 8,
-    "countryId": 4,
-    "price": 450.40
-  },
-  {
-    "id": 10,
-    "title": "Don Quixote",
-    "genreId": 5,
-    "authorId": 9,
-    "countryId": 5,
-    "price": 499.99
-  }
+    {
+        "authorId": 1,
+        "countryId": 1,
+        "genreId": 1,
+        "id": 1,
+        "price": 299.989990234375,
+        "title": "To Kill a Mockingbird"
+    },
+    {
+        "authorId": 2,
+        "countryId": 2,
+        "genreId": 2,
+        "id": 2,
+        "price": 249.5,
+        "title": "1984"
+    },
+    {
+        "authorId": 3,
+        "countryId": 2,
+        "genreId": 3,
+        "id": 3,
+        "price": 199.0,
+        "title": "Pride and Prejudice"
+    },
+    {
+        "authorId": 4,
+        "countryId": 1,
+        "genreId": 1,
+        "id": 4,
+        "price": 225.75,
+        "title": "The Great Gatsby"
+    },
+    {
+        "authorId": 5,
+        "countryId": 1,
+        "genreId": 1,
+        "id": 5,
+        "price": 279.989990234375,
+        "title": "The Catcher in the Rye"
+    },
+    {
+        "authorId": 6,
+        "countryId": 2,
+        "genreId": 2,
+        "id": 6,
+        "price": 260.0,
+        "title": "Brave New World"
+    },
+    {
+        "authorId": 7,
+        "countryId": 3,
+        "genreId": 4,
+        "id": 7,
+        "price": 350.95001220703125,
+        "title": "Crime and Punishment"
+    },
+    {
+        "authorId": 7,
+        "countryId": 3,
+        "genreId": 4,
+        "id": 8,
+        "price": 399.0,
+        "title": "The Brothers Karamazov"
+    },
+    {
+        "authorId": 8,
+        "countryId": 4,
+        "genreId": 5,
+        "id": 9,
+        "price": 450.3999938964844,
+        "title": "Les Misérables"
+    },
+    {
+        "authorId": 9,
+        "countryId": 5,
+        "genreId": 5,
+        "id": 10,
+        "price": 499.989990234375,
+        "title": "Don Quixote"
+    }
 ]

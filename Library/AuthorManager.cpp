@@ -1,4 +1,4 @@
-#include "AuthorManager.h"
+﻿#include "AuthorManager.h"
 #include <iostream>
 #include <algorithm>
 #include <sstream>
@@ -124,6 +124,41 @@ void AuthorManager::listAuthorsSortedByLastName() const {
     }
 }
 
+void AuthorManager::countAuthorsPerCountry(const CountryManager& countryManager) const {
+    std::map<int, int> countryCounts;
+
+    // Count authors by countryId
+    for (const auto& author : authors) {
+        countryCounts[author.countryId]++;
+    }
+
+    for (const auto& country : countryManager.getAll()) {
+        int count = countryCounts[country.id];
+        if (count == 0) continue;
+
+        std::cout << "\n" << country.name << " (ID: " << country.id << ") — " << count << " author(s)\n";
+        std::cout << std::left
+            << std::setw(6) << "ID"
+            << std::setw(15) << "Last Name"
+            << std::setw(15) << "First Name"
+            << std::setw(15) << "Middle Name"
+            << "\n"
+            << std::string(51, '-') << "\n";
+
+        for (const auto& author : authors) {
+            if (author.countryId == country.id) {
+                std::cout << std::left
+                    << std::setw(6) << author.id
+                    << std::setw(15) << author.lastName
+                    << std::setw(15) << author.firstName
+                    << std::setw(15) << author.middleName
+                    << "\n";
+            }
+        }
+    }
+
+}
+
 void AuthorManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);
     if (!out) {
@@ -159,11 +194,9 @@ const std::vector<Author>& AuthorManager::getAll() const {
     return authors;
 }
 
-Author* AuthorManager::findById(int id) {
-    for (auto& author : authors) {
-        if (author.id == id) {
-            return &author;
-        }
+const Author* AuthorManager::findById(int id) const {
+    for (const auto& author : authors) {
+        if (author.id == id) return &author;
     }
     return nullptr;
 }

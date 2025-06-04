@@ -1,72 +1,72 @@
 [
-  {
-    "batchId": 1001,
-    "bookId": 1,
-    "publisherId": 1,
-    "copies": 300,
-    "releaseDate": "2024-03-12"
-  },
-  {
-    "batchId": 1002,
-    "bookId": 2,
-    "publisherId": 2,
-    "copies": 250,
-    "releaseDate": "2023-11-20"
-  },
-  {
-    "batchId": 1003,
-    "bookId": 3,
-    "publisherId": 2,
-    "copies": 200,
-    "releaseDate": "2024-01-10"
-  },
-  {
-    "batchId": 1004,
-    "bookId": 4,
-    "publisherId": 3,
-    "copies": 150,
-    "releaseDate": "2023-09-05"
-  },
-  {
-    "batchId": 1005,
-    "bookId": 5,
-    "publisherId": 1,
-    "copies": 180,
-    "releaseDate": "2023-12-15"
-  },
-  {
-    "batchId": 1006,
-    "bookId": 6,
-    "publisherId": 2,
-    "copies": 230,
-    "releaseDate": "2024-02-01"
-  },
-  {
-    "batchId": 1007,
-    "bookId": 7,
-    "publisherId": 3,
-    "copies": 270,
-    "releaseDate": "2023-10-30"
-  },
-  {
-    "batchId": 1008,
-    "bookId": 8,
-    "publisherId": 1,
-    "copies": 160,
-    "releaseDate": "2024-04-18"
-  },
-  {
-    "batchId": 1009,
-    "bookId": 9,
-    "publisherId": 2,
-    "copies": 220,
-    "releaseDate": "2024-05-25"
-  },
-  {
-    "batchId": 1010,
-    "bookId": 10,
-    "publisherId": 3,
-    "copies": 310,
-    "releaseDate": "2024-06-03"
-  }
+    {
+        "batchId": 1001,
+        "bookId": 1,
+        "copies": 300,
+        "publisherId": 1,
+        "releaseDate": "2024-03-12"
+    },
+    {
+        "batchId": 1002,
+        "bookId": 2,
+        "copies": 250,
+        "publisherId": 2,
+        "releaseDate": "2023-11-20"
+    },
+    {
+        "batchId": 1003,
+        "bookId": 3,
+        "copies": 200,
+        "publisherId": 2,
+        "releaseDate": "2024-01-10"
+    },
+    {
+        "batchId": 1004,
+        "bookId": 4,
+        "copies": 150,
+        "publisherId": 3,
+        "releaseDate": "2023-09-05"
+    },
+    {
+        "batchId": 1005,
+        "bookId": 5,
+        "copies": 180,
+        "publisherId": 1,
+        "releaseDate": "2023-12-15"
+    },
+    {
+        "batchId": 1006,
+        "bookId": 6,
+        "copies": 230,
+        "publisherId": 2,
+        "releaseDate": "2024-02-01"
+    },
+    {
+        "batchId": 1007,
+        "bookId": 7,
+        "copies": 270,
+        "publisherId": 3,
+        "releaseDate": "2023-10-30"
+    },
+    {
+        "batchId": 1008,
+        "bookId": 8,
+        "copies": 160,
+        "publisherId": 1,
+        "releaseDate": "2024-04-18"
+    },
+    {
+        "batchId": 1009,
+        "bookId": 9,
+        "copies": 220,
+        "publisherId": 2,
+        "releaseDate": "2024-05-25"
+    },
+    {
+        "batchId": 1010,
+        "bookId": 10,
+        "copies": 310,
+        "publisherId": 3,
+        "releaseDate": "2024-06-03"
+    }
 ]

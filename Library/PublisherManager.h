@@ -19,4 +19,8 @@ public:
 
     void saveToFile(const std::string& filename);
     void loadFromFile(const std::string& filename);
+
+    const std::vector<Publisher>& getAll() const;
+    const Publisher* findById(int id) const;
+
 };

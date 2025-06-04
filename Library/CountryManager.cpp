@@ -115,3 +115,7 @@ Country* CountryManager::findById(int id) {
     }
     return nullptr;
 }
+
+const std::vector<Country>& CountryManager::getAll() const {
+    return countries;
+}

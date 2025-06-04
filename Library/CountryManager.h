@@ -12,6 +12,7 @@ public:
     void remove() override;
     void update() override;
     void listAll() const override;
+    const std::vector<Country>& getAll() const;
 
     Country* findById(int id);
 

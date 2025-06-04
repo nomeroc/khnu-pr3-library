@@ -76,6 +76,19 @@ void GenreManager::listAll() const {
     }
 }
 
+void GenreManager::deleteGenreByName(const std::string& name) {
+    auto it = std::remove_if(genres.begin(), genres.end(), [&](const Genre& genre) {
+        return genre.name == name;
+        });
+
+    if (it != genres.end()) {
+        genres.erase(it, genres.end());
+        std::cout << "\nGenre \"" << name << "\" deleted successfully.\n";
+    }
+    else {
+        std::cout << "\nGenre \"" << name << "\" not found.\n";
+    }
+}
 
 void GenreManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);
@@ -115,4 +128,8 @@ Genre* GenreManager::findById(int id) {
         }
     }
     return nullptr;
+}
+
+const std::vector<Genre>& GenreManager::getAll() const {
+    return genres;
 }

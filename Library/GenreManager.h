@@ -17,4 +17,7 @@ public:
 
     void saveToFile(const std::string& filename);
     void loadFromFile(const std::string& filename);
+    void deleteGenreByName(const std::string& name);
+
+    const std::vector<Genre>& getAll() const;
 };

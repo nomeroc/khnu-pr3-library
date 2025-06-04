@@ -170,3 +170,14 @@ Publisher* PublisherManager::findById(int id) {
     }
     return nullptr;
 }
+
+const std::vector<Publisher>& PublisherManager::getAll() const {
+    return publishers;
+}
+
+const Publisher* PublisherManager::findById(int id) const {
+    for (const auto& pub : publishers) {
+        if (pub.id == id) return &pub;
+    }
+    return nullptr;
+}

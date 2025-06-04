@@ -5,6 +5,9 @@
 #include <iomanip>
 #include "AuthorManager.h"
 #include "json.hpp"
+#include <set>
+#include <iomanip>
+
 using json = nlohmann::json;
 
 void BookManager::add() {
@@ -157,7 +160,64 @@ void BookManager::listBooksByAuthorLastName(const std::string& lastName, const A
         std::cout << "No books found for author " << lastName << ".\n";
 }
 
+void BookManager::listGenresByAuthorId(int authorId, const GenreManager& genreManager, const AuthorManager& authorManager) const {
+    std::set<int> genreIds;
 
+    for (const auto& book : books) {
+        if (book.authorId == authorId) {
+            genreIds.insert(book.genreId);
+        }
+    }
+
+    const Author* author = authorManager.findById(authorId);
+    std::string authorName = (author != nullptr)
+        ? (author->lastName + " " + author->firstName + " " + author->middleName)
+        : "(Unknown Author)";
+
+    std::cout << "\nGenres written by " << authorName << " (ID: " << authorId << "):\n";
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(30) << "Genre"
+        << "\n"
+        << std::string(36, '-') << "\n";
+
+    for (const auto& genre : genreManager.getAll()) {
+        if (genreIds.count(genre.id)) {
+            std::cout << std::left
+                << std::setw(6) << genre.id
+                << std::setw(30) << genre.name
+                << "\n";
+        }
+    }
+}
+
+void BookManager::adjustPricesByPercentage(float percentage) {
+    float factor = 1.0f + (percentage / 100.0f);
+
+    std::cout << "\nAdjusting all book prices by " << percentage << "%\n";
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(30) << "Title"
+        << std::setw(12) << "Old Price"
+        << std::setw(12) << "New Price"
+        << "\n"
+        << std::string(60, '-') << "\n";
+
+    for (auto& book : books) {
+        float oldPrice = book.price;
+        book.price *= factor;
+        float newPrice = book.price;
+
+        std::cout << std::left
+            << std::setw(6) << book.id
+            << std::setw(30) << book.title
+            << std::setw(12) << std::fixed << std::setprecision(2) << oldPrice
+            << std::setw(12) << std::fixed << std::setprecision(2) << newPrice
+            << "\n";
+    }
+
+    std::cout << "\nPrice adjustment completed.\n";
+}
 
 
 void BookManager::saveToFile(const std::string& filename) {

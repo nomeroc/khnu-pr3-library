@@ -4,8 +4,11 @@
 #include "UserInterface.h"
 #include "AuthManager.h"
 #include <iostream>
+#include <windows.h>
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
+
     AuthManager auth;
     AuthManager::Role role = auth.login();
 
