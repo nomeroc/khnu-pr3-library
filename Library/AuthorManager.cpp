@@ -95,6 +95,31 @@ void AuthorManager::listAll() const {
     }
 }
 
+void AuthorManager::listAuthorsSortedByLastName() const {
+    if (authors.empty()) {
+        std::cout << "No authors found.\n";
+        return;
+    }
+
+    std::vector<Author> sorted = authors;
+
+    std::sort(sorted.begin(), sorted.end(), [](const Author& a, const Author& b) {
+        return a.lastName < b.lastName;
+        });
+
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(15) << "Last Name"
+        << std::setw(15) << "First Name"
+        << std::setw(15) << "Middle Name"
+        << std::setw(10) << "Country"
+        << "\n"
+        << std::string(61, '-') << "\n";
+
+    for (const auto& author : sorted) {
+        author.print();
+    }
+}
 
 void AuthorManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);
@@ -142,6 +167,10 @@ void AuthorManager::loadFromFile(const std::string& filename) {
 
     in.close();
     std::cout << "Authors loaded from " << filename << "\n";
+}
+
+const std::vector<Author>& AuthorManager::getAll() const {
+    return authors;
 }
 
 Author* AuthorManager::findById(int id) {

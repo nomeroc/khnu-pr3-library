@@ -2,6 +2,8 @@
 #include <vector>
 #include "Book.h"
 #include "IDatabaseEntity.h"
+#include "AuthorManager.h"
+
 
 class BookManager : public IDatabaseEntity {
 private:
@@ -12,6 +14,8 @@ public:
     void remove() override;
     void update() override;
     void listAll() const override;
+    void listBooksByPriceRange(float minPrice, float maxPrice) const;
+    void listBooksByAuthorLastName(const std::string& lastName, const AuthorManager& authorManager) const;
 
     void saveToFile(const std::string& filename);
     void loadFromFile(const std::string& filename);

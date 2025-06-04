@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+#include "AuthorManager.h"
 
 void BookManager::add() {
     int id, genreId, authorId, countryId;
@@ -92,6 +93,70 @@ void BookManager::listAll() const {
         book.print();
     }
 }
+
+void BookManager::listBooksByPriceRange(float minPrice, float maxPrice) const {
+    bool found = false;
+
+    std::cout << "\nBooks priced between " << minPrice << " and " << maxPrice << ":\n";
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(25) << "Title"
+        << std::setw(10) << "Genre"
+        << std::setw(10) << "Author"
+        << std::setw(10) << "Country"
+        << std::setw(10) << "Price"
+        << "\n"
+        << std::string(46, '-') << "\n";
+
+    for (const auto& book : books) {
+        if (book.price >= minPrice && book.price <= maxPrice) {
+            book.print(); // Make sure Book::print() shows title and price
+            found = true;
+        }
+    }
+
+    if (!found) std::cout << "No books in this price range.\n";
+}
+
+void BookManager::listBooksByAuthorLastName(const std::string& lastName, const AuthorManager& authorManager) const {
+    std::vector<int> matchingAuthorIds;
+
+    for (const auto& author : authorManager.getAll()) {
+        if (author.lastName == lastName) {
+            matchingAuthorIds.push_back(author.id);
+        }
+    }
+
+    if (matchingAuthorIds.empty()) {
+        std::cout << "No authors found with last name: " << lastName << "\n";
+        return;
+    }
+
+    std::cout << "\nBooks by authors with last name: " << lastName << "\n";
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(25) << "Title"
+        << std::setw(10) << "Genre"
+        << std::setw(10) << "Author"
+        << std::setw(10) << "Country"
+        << std::setw(10) << "Price"
+        << "\n"
+        << std::string(56, '-') << "\n";
+
+    bool found = false;
+    for (const auto& book : books) {
+        if (std::find(matchingAuthorIds.begin(), matchingAuthorIds.end(), book.authorId) != matchingAuthorIds.end()) {
+            book.print();
+            found = true;
+        }
+    }
+
+    if (!found)
+        std::cout << "No books found for author " << lastName << ".\n";
+}
+
+
+
 
 void BookManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);

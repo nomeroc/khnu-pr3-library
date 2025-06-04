@@ -7,11 +7,14 @@ class AuthorManager : public IDatabaseEntity {
 private:
     std::vector<Author> authors;
 
+
 public:
     void add() override;
     void remove() override;
     void update() override;
     void listAll() const override;
+    void listAuthorsSortedByLastName() const;
+    const std::vector<Author>& getAll() const;
 
     // Optional helper
     Author* findById(int id);

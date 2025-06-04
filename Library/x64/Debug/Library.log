@@ -1,7 +1,6 @@
-﻿  AuthorManager.cpp
-  CountryManager.cpp
-  GenreManager.cpp
-  PublisherManager.cpp
-  ReleaseManager.cpp
+﻿  AdminInterface.cpp
+  BookManager.cpp
+  main.cpp
+  UserInterface.cpp
   Generating Code...
   Library.vcxproj -> C:\Users\Adminchik\Desktop\practical\Library\x64\Debug\Library.exe

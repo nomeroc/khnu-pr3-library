@@ -101,6 +101,33 @@ void PublisherManager::listAll() const {
     }
 }
 
+void PublisherManager::listPublishersWithoutEmail() const {
+    std::cout << "\nPublishers without email:\n";
+
+    std::cout << std::left
+        << std::setw(6) << "ID"
+        << std::setw(20) << "Name"
+        << std::setw(20) << "Phone"
+        << std::setw(25) << "Email"
+        << std::setw(20) << "Editor"
+        << "\n"
+        << std::string(91, '-') << "\n";
+
+    bool found = false;
+    for (const auto& publisher : publishers) {
+        if (publisher.email.empty() || publisher.email == "-") {
+            publisher.print();
+            found = true;
+        }
+    }
+
+    if (!found)
+        std::cout << "All publishers have an email.\n";
+}
+
+void PublisherManager::countPublishers() const {
+    std::cout << "\nTotal number of publishers: " << publishers.size() << "\n";
+}
 
 void PublisherManager::saveToFile(const std::string& filename) {
     std::ofstream out(filename);

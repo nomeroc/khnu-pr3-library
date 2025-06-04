@@ -21,21 +21,70 @@ void AdminInterface::showEntityMenu(const std::string& entityName, IDatabaseEnti
         std::cout << "2. Remove\n";
         std::cout << "3. Update\n";
         std::cout << "4. List All\n";
+
+        // Extra option only for PublisherManager
+        if (entityName == "Publishers") {
+            std::cout << "5. List publishers without email\n";
+            std::cout << "6. Count publishers\n";
+        }
+        else if (entityName == "Authors")
+            std::cout << "5. List authors alphabetically\n";
+        if (entityName == "Books") {
+            std::cout << "5. List books in price range\n";
+            std::cout << "6. List books by author\n";
+        }
+
+
+
         std::cout << "0. Back\n";
         std::cout << "Choose option: ";
         std::cin >> choice;
 
-        switch (choice) {
-        case 1: manager.add(); break;
-        case 2: manager.remove(); break;
-        case 3: manager.update(); break;
-        case 4: manager.listAll(); break;
-        case 0: break;
-        default: std::cout << "Invalid option.\n";
+        if (entityName == "Publishers" && choice == 5) {
+            clearScreen();
+            publisherManager.listPublishersWithoutEmail();
         }
+        else if (entityName == "Publishers" && choice == 6) {
+            clearScreen();
+            publisherManager.countPublishers();
+        }
+        else if (entityName == "Authors" && choice == 5) {
+            clearScreen();
+            authorManager.listAuthorsSortedByLastName();
+        }
+        else if (entityName == "Books" && choice == 5) {
+            float minPrice, maxPrice;
+            std::cout << "Enter minimum price: ";
+            std::cin >> minPrice;
+            std::cout << "Enter maximum price: ";
+            std::cin >> maxPrice;
+            clearScreen();
+            bookManager.listBooksByPriceRange(minPrice, maxPrice);
+        }
+        else if (entityName == "Books" && choice == 6) {
+            std::string lastName;
+            std::cout << "Enter author's last name: ";
+            std::cin.ignore();
+            std::getline(std::cin, lastName);
+            clearScreen();
+            bookManager.listBooksByAuthorLastName(lastName, authorManager);
+        }
+        else {
+            switch (choice) {
+            case 1: manager.add(); break;
+            case 2: manager.remove(); break;
+            case 3: manager.update(); break;
+            case 4: manager.listAll(); break;
+            case 0: break;
+            default: std::cout << "Invalid option.\n";
+            }
+        }
+
+
         if (choice != 0) pause();
     } while (choice != 0);
 }
+
 
 void AdminInterface::run() {
     int choice;

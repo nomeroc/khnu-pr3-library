@@ -12,6 +12,8 @@ public:
     void remove() override;
     void update() override;
     void listAll() const override;
+    void listPublishersWithoutEmail() const;
+    void countPublishers() const;
 
     Publisher* findById(int id);
 
