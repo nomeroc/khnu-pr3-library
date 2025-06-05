@@ -9,8 +9,8 @@
 
 class AdminInterface {
 private:
-    BookManager bookManager;
-    AuthorManager authorManager;
+    BookManager& bookManager;
+    AuthorManager& authorManager;
     GenreManager genreManager;
     CountryManager countryManager;
     PublisherManager publisherManager;
@@ -19,6 +19,6 @@ private:
     void showEntityMenu(const std::string& entityName, IDatabaseEntity& manager);
 
 public:
-    AdminInterface();
+    AdminInterface(BookManager& bookMgr, AuthorManager& authorMgr);
     void run();  // entry point
 };

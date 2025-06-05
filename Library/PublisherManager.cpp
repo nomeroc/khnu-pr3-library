@@ -32,6 +32,8 @@ void PublisherManager::add() {
 
     publishers.emplace_back(id, name, address, phone, email, chiefEditor);
     std::cout << "Publisher added successfully.\n";
+
+    saveToFile("publishers.json");
 }
 
 void PublisherManager::remove() {
@@ -50,6 +52,8 @@ void PublisherManager::remove() {
     else {
         std::cout << "Publisher not found.\n";
     }
+
+    saveToFile("publishers.json");
 }
 
 void PublisherManager::update() {
@@ -81,6 +85,8 @@ void PublisherManager::update() {
     }
 
     std::cout << "Publisher not found.\n";
+
+    saveToFile("publishers.json");
 }
 
 void PublisherManager::listAll() const {

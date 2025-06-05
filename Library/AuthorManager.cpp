@@ -30,6 +30,8 @@ void AuthorManager::add() {
 
     authors.emplace_back(id, firstName, lastName, middleName, countryId);
     std::cout << "Author added successfully.\n";
+
+    saveToFile("authors.json");
 }
 
 void AuthorManager::remove() {
@@ -48,6 +50,8 @@ void AuthorManager::remove() {
     else {
         std::cout << "Author not found.\n";
     }
+
+    saveToFile("authors.json");
 }
 
 void AuthorManager::update() {
@@ -76,6 +80,8 @@ void AuthorManager::update() {
     }
 
     std::cout << "Author not found.\n";
+
+    saveToFile("authors.json");
 }
 
 void AuthorManager::listAll() const {

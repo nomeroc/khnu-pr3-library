@@ -36,6 +36,8 @@ void BookManager::add() {
 
     books.emplace_back(id, title, genreId, authorId, countryId, price);
     std::cout << "Book added successfully.\n";
+
+    saveToFile("books.json");
 }
 
 void BookManager::remove() {
@@ -54,6 +56,7 @@ void BookManager::remove() {
     else {
         std::cout << "Book not found.\n";
     }
+    saveToFile("books.json");
 }
 
 void BookManager::update() {
@@ -75,6 +78,8 @@ void BookManager::update() {
         }
     }
     std::cout << "Book not found.\n";
+
+    saveToFile("books.json");
 }
 
 void BookManager::listAll() const {

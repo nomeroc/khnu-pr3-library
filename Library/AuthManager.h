@@ -3,7 +3,7 @@
 
 class AuthManager {
 public:
-    enum class Role { ADMIN, USER };
+    enum class Role { ADMIN, USER, UNKNOWN };
 
-    Role login();  // prompt user for role and return it
+    Role login();  // Determines role based on password
 };

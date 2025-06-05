@@ -20,6 +20,8 @@ void CountryManager::add() {
 
     countries.emplace_back(id, name);
     std::cout << "Country added successfully.\n";
+
+    saveToFile("countries.json");
 }
 
 void CountryManager::remove() {
@@ -38,6 +40,8 @@ void CountryManager::remove() {
     else {
         std::cout << "Country not found.\n";
     }
+
+    saveToFile("countries.json");
 }
 
 void CountryManager::update() {
@@ -56,6 +60,8 @@ void CountryManager::update() {
     }
 
     std::cout << "Country not found.\n";
+
+    saveToFile("countries.json");
 }
 
 void CountryManager::listAll() const {

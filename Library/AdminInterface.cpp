@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include "ConsoleUtils.h"
 
-AdminInterface::AdminInterface() {
+AdminInterface::AdminInterface(BookManager& bookMgr, AuthorManager& authorMgr) : bookManager(bookMgr), authorManager(authorMgr) {
 	bookManager.loadFromFile("books.json");
 	authorManager.loadFromFile("authors.json");
 	genreManager.loadFromFile("genres.json");

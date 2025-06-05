@@ -28,6 +28,8 @@ void ReleaseManager::add() {
 
     releases.emplace_back(batchId, bookId, publisherId, copies, date);
     std::cout << "Release added successfully.\n";
+
+    saveToFile("releases.json");
 }
 
 void ReleaseManager::remove() {
@@ -46,6 +48,8 @@ void ReleaseManager::remove() {
     else {
         std::cout << "Release not found.\n";
     }
+
+    saveToFile("releases.json");
 }
 
 void ReleaseManager::update() {
@@ -75,6 +79,8 @@ void ReleaseManager::update() {
     }
 
     std::cout << "Release not found.\n";
+
+    saveToFile("releases.json");
 }
 
 void ReleaseManager::listAll() const {

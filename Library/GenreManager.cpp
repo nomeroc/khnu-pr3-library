@@ -20,6 +20,8 @@ void GenreManager::add() {
 
     genres.emplace_back(id, name);
     std::cout << "Genre added successfully.\n";
+
+    saveToFile("genres.json");
 }
 
 void GenreManager::remove() {
@@ -38,6 +40,8 @@ void GenreManager::remove() {
     else {
         std::cout << "Genre not found.\n";
     }
+
+    saveToFile("genres.json");
 }
 
 void GenreManager::update() {
@@ -57,6 +61,8 @@ void GenreManager::update() {
     }
 
     std::cout << "Genre not found.\n";
+
+    saveToFile("genres.json");
 }
 
 void GenreManager::listAll() const {

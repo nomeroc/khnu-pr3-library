@@ -1,12 +1,11 @@
 #include "UserInterface.h"
 #include <iostream>
-#include <cstdlib>
+#include <limits>
 #include "ConsoleUtils.h"
 
 UserInterface::UserInterface(BookManager& bookMgr, AuthorManager& authorMgr)
     : bookManager(bookMgr), authorManager(authorMgr) {
 }
-
 
 void UserInterface::showBooks() {
     clearScreen();
@@ -27,12 +26,22 @@ void UserInterface::searchBooksByAuthor() {
     int authorId;
     std::cout << "Enter author ID: ";
     std::cin >> authorId;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::cout << "\nBooks by Author ID " << authorId << ":\n";
-    // No filter method? Just listAll and tell user to visually search
-    for (const auto& book : bookManager.getAll()) {
-        if (book.authorId == authorId)
-            book.print();
+    const Author* author = authorManager.findById(authorId);
+    if (!author) {
+        std::cout << "Author not found.\n";
+    }
+    else {
+        std::cout << "\nBooks by " << author->lastName << " " << author->firstName << ":\n";
+        bool found = false;
+        for (const auto& book : bookManager.getAll()) {
+            if (book.authorId == authorId) {
+                book.print();
+                found = true;
+            }
+        }
+        if (!found) std::cout << "No books found for this author.\n";
     }
     pause();
 }
@@ -44,12 +53,17 @@ void UserInterface::filterBooksByPrice() {
     std::cin >> min;
     std::cout << "Enter max price: ";
     std::cin >> max;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::cout << "\nBooks in price range " << min << " - " << max << ":\n";
+    std::cout << "\nBooks priced between " << min << " and " << max << ":\n";
+    bool found = false;
     for (const auto& book : bookManager.getAll()) {
-        if (book.price >= min && book.price <= max)
+        if (book.price >= min && book.price <= max) {
             book.print();
+            found = true;
+        }
     }
+    if (!found) std::cout << "No books found in this price range.\n";
     pause();
 }
 
@@ -72,7 +86,8 @@ void UserInterface::run() {
         case 3: searchBooksByAuthor(); break;
         case 4: filterBooksByPrice(); break;
         case 0: std::cout << "Goodbye!\n"; break;
-        default: std::cout << "Invalid option.\n";
+        default: std::cout << "Invalid option.\n"; pause();
         }
+
     } while (choice != 0);
 }
